@@ -1,9 +1,10 @@
+import DashBoard from './Dashboard';
 
 function App() {
 
   return (
     <>
-      <div>Hello</div>
+      <DashBoard />
     </>
   )
 }
