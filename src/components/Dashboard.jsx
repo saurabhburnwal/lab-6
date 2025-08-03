@@ -16,7 +16,7 @@ function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             setIsLoading(true);
-            
+            await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate loading delay
             try {
                 const data = await getRestaurantData();
                 setRestaurants(data);
@@ -45,16 +45,8 @@ function Dashboard() {
     };
 
     const LoadingSpinner = () => (
-        <div className="min-h-screen bg-gray-100 p-6">
-            <div className="max-w-6xl mx-auto">
-                <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    Restaurant Dashboard
-                </h1>
-                <div className="flex justify-center items-center h-64">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    <span className="ml-3 text-gray-600">Loading dashboard data...</span>
-                </div>
-            </div>
+        <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-blue-600"></div>
         </div>
     );
 
@@ -63,20 +55,11 @@ function Dashboard() {
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-gray-800 mb-2">
-                        🍽️ Restaurant Dashboard
-                    </h1>
-                    <p className="text-gray-600">
-                        Real-time analytics and insights from your restaurant data
-                    </p>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <StatsCard 
                         title="Total Restaurants"
                         value={stats.totalRestaurants}
-                        icon="fa-store"
+                        icon="store"
                         description="Total number of restaurants in database"
                         borderColor="border-blue-500"
                         iconBgColor="bg-blue-100"
@@ -86,7 +69,7 @@ function Dashboard() {
                     <StatsCard 
                         title="Total Cuisines"
                         value={stats.totalCuisines}
-                        icon="fa-utensils"
+                        icon="utensils"
                         description="Unique cuisine types available"
                         borderColor="border-green-500"
                         iconBgColor="bg-green-100"
@@ -96,7 +79,7 @@ function Dashboard() {
                     <StatsCard 
                         title="Average Rating"
                         value={`${stats.averageRating} ★`}
-                        icon="fa-star"
+                        icon="star"
                         description="Overall quality rating"
                         borderColor="border-yellow-500"
                         iconBgColor="bg-yellow-100"
@@ -106,7 +89,7 @@ function Dashboard() {
                     <StatsCard 
                         title="Total Reviews"
                         value={stats.totalReviews}
-                        icon="fa-comments"
+                        icon="comments"
                         description="Total customer engagement"
                         borderColor="border-purple-500"
                         iconBgColor="bg-purple-100"
